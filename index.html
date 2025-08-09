@@ -9,12 +9,12 @@
         body {
             margin: 0;
             font-family: 'Poppins', Arial, sans-serif;
-            background: linear-gradient(120deg, #6a8ce8 0%, #e57fdc 70%, #fff 100%);
+            background: linear-gradient(120deg, #e5e9fc 0%, #f8e5fc 100%);
             min-height: 100vh;
             color: #232046;
         }
         nav {
-            background: rgba(255,255,255,0.92);
+            background: rgba(255,255,255,0.97);
             box-shadow: 0 2px 12px rgba(0,0,0,0.04);
             position: sticky;
             top: 0;
@@ -47,6 +47,7 @@
             background: transparent;
             padding: 5rem 1rem 2rem 1rem;
             text-align: center;
+            position: relative;
         }
         header h1 {
             font-size: 2.7rem;
@@ -58,6 +59,12 @@
         header p {
             font-size: 1.2rem;
             margin-bottom: 1.5rem;
+            background: rgba(255,255,255,0.92);
+            display: inline-block;
+            padding: 1.2rem 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(106,140,232,0.08);
+            color: #232046;
         }
         .cta-buttons {
             margin: 2rem 0;
@@ -82,13 +89,19 @@
         section { max-width: 1200px; margin: auto; padding: 3rem 1rem; }
         .section-title {
             font-size: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.2rem;
             text-align: center;
             background: linear-gradient(90deg,#6a8ce8,#e57fdc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        /* Prismes */
+        /* Prisme central SVG */
+        .prisme-svg {
+            width: 180px;
+            margin: 0 auto 2.3rem auto;
+            display: block;
+        }
+        /* Prismes interactifs */
         .prisms-grid {
             display: flex;
             flex-wrap: wrap;
@@ -98,21 +111,23 @@
         }
         .prism-card {
             background: rgba(255,255,255,0.98);
-            border-radius: 20px;
+            border-radius: 22px;
             padding: 2rem 1.2rem;
-            box-shadow: 0 6px 24px 0 rgba(106,140,232,.15);
+            box-shadow: 0 6px 24px 0 rgba(106,140,232,.18);
             width: 280px;
             text-align: center;
             cursor: pointer;
             transition: box-shadow 0.2s, transform 0.2s;
+            border: 2px solid #f0f3ff;
         }
         .prism-card:hover {
-            box-shadow: 0 12px 30px 0 rgba(229,127,220,.13);
+            box-shadow: 0 12px 38px 0 rgba(229,127,220,.13);
             transform: scale(1.03);
+            border-color: #e57fdc;
         }
         .prism-icon { font-size: 2.3rem; margin-bottom: 0.7rem; }
-        .prism-title { font-weight: 700; font-size: 1.13rem; margin-bottom: 0.8rem; }
-        .prism-short { font-size: 1rem; margin-bottom: 0; }
+        .prism-title { font-weight: 700; font-size: 1.13rem; margin-bottom: 0.6rem; }
+        .prism-short { font-size: 1rem; margin-bottom: 0; color: #4f4f6e;}
         .prism-desc {
             display: none;
             margin-top: 1rem;
@@ -124,6 +139,25 @@
             text-align: left;
         }
         .prism-card.active .prism-desc { display: block; }
+        /* Onglet Clownsultance */
+        .clownsultance-panel {
+            background: #fff5fc;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 16px rgba(229,127,220,0.10);
+            max-width: 680px;
+            margin: 2.5rem auto 2rem auto;
+            text-align: left;
+        }
+        .clownsultance-panel h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: #e57fdc;
+        }
+        .clownsultance-panel ul {
+            margin: 1.2rem 0 0 0;
+            padding: 0 0 0 1.2em;
+        }
         /* Avis et clients */
         .avis-grid, .clients-grid {
             display: flex;
@@ -192,6 +226,29 @@
             font-weight: 500;
         }
         .contact-infos a:hover { color: #e57fdc; }
+        /* Footer réseaux */
+        footer {
+            text-align: center;
+            padding: 2rem 0 1rem 0;
+            color: #6a8ce8;
+            font-size: 1rem;
+            background: transparent;
+        }
+        .footer-social {
+            margin: 0.8rem 0 0.3rem 0;
+        }
+        .footer-social a {
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+        .footer-social svg {
+            vertical-align: middle;
+            width: 28px;
+            height: 28px;
+            fill: #5c4fb9;
+            transition: fill 0.3s;
+        }
+        .footer-social a:hover svg { fill: #e57fdc; }
         /* Responsive */
         @media (max-width: 900px) {
             .nav-container { padding: 1rem; }
@@ -202,6 +259,7 @@
             .section-title { font-size: 1.3rem;}
             .prism-card, .avis-card { width: 100%; }
             section { padding: 2rem 0.6rem; }
+            .prisme-svg { width: 100px;}
         }
     </style>
 </head>
@@ -212,6 +270,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Accueil</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#clownsultance">Clownsultance</a></li>
                 <li><a href="#avis">Avis</a></li>
                 <li><a href="#clients">Nos clients</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -229,6 +288,31 @@
             🎯 <b>Ma mission</b> : faciliter des changements créatifs et réalistes.
             </span>
         </p>
+        <!-- SVG Prisme visuel central -->
+        <svg class="prisme-svg" viewBox="0 0 100 100">
+            <!-- Triangle prisme -->
+            <polygon points="50,10 90,85 10,85"
+                fill="url(#glass)" stroke="#6a8ce8" stroke-width="2"/>
+            <!-- Effet arc-en-ciel -->
+            <defs>
+                <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#e57fdc"/>
+                    <stop offset="60%" stop-color="#6a8ce8"/>
+                    <stop offset="100%" stop-color="#fff"/>
+                </linearGradient>
+                <linearGradient id="rainbow" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#e57fdc" />
+                    <stop offset="20%" stop-color="#f5d564" />
+                    <stop offset="40%" stop-color="#84eba2" />
+                    <stop offset="60%" stop-color="#6a8ce8" />
+                    <stop offset="80%" stop-color="#f8e5fc" />
+                    <stop offset="100%" stop-color="#fff" />
+                </linearGradient>
+            </defs>
+            <!-- Rayon arc-en-ciel sortant du prisme -->
+            <rect x="35" y="85" width="30" height="10" fill="url(#rainbow)" rx="3" />
+            <rect x="48" y="15" width="4" height="70" fill="url(#rainbow)" opacity="0.5" />
+        </svg>
         <div class="cta-buttons">
             <a href="#services"><button class="cta-button">Découvrir les services</button></a>
             <a href="#contact"><button class="cta-button">Réserver un entretien</button></a>
@@ -247,8 +331,8 @@
                 <div class="prism-title">Consultance RH & Gestion de projets</div>
                 <div class="prism-short">Changement, interim, organisation</div>
                 <div class="prism-desc">
-                    Forgée depuis 2005 dans des structures de 80 à 1.200 personnes, publiques comme privées.<br>
-                    Expérience de management : automatisation de processus, harmonisation des fonctions et salaires, développement de la polyvalence, réorganisation post-fusion…
+                    Une expérience solide, forgée depuis 2005 dans des structures de 80 à 1.200 personnes, publiques comme privées.<br>
+                    Management, automatisation de processus, harmonisation des fonctions et salaires, développement de la polyvalence, réorganisation post-fusion…
                     <br><a href="https://www.linkedin.com/posts/gvanneyverseel_improvisation-clownensoin-clownenmilieudesoins-activity-7335569686203428864-dia9?utm_source=share&utm_medium=member_desktop" target="_blank">Voir sur LinkedIn</a>
                 </div>
             </div>
@@ -257,7 +341,8 @@
                 <div class="prism-title">Coaching de transition professionnelle</div>
                 <div class="prism-short">Élan, clarté, confort</div>
                 <div class="prism-desc">
-                    Présence, écoute et parole ajustée pour aider à retrouver de l’élan et de la clarté dans les périodes de transition.
+                    Écoute et présence pour aider à retrouver de l’élan et de la clarté dans les périodes de transition.<br>
+                    Un accompagnement personnalisé pour les managers, dirigeant·es, équipes en mutation.
                     <br><a href="https://www.linkedin.com/posts/gvanneyverseel_coaching-transitionprofessionnelle-changement-activity-7334135233363009538-Zb6d?utm_source=share&utm_medium=member_desktop" target="_blank">Voir sur LinkedIn</a>
                 </div>
             </div>
@@ -266,10 +351,29 @@
                 <div class="prism-title">Clownsultance</div>
                 <div class="prism-short">Créativité relationnelle</div>
                 <div class="prism-desc">
-                    Écoute fine, liens sincères, co-construction. Compétences développées dans l’impro, le clown en milieux de soins, et l’accompagnement des équipes.
-                    <br><a href="https://www.linkedin.com/posts/gvanneyverseel_improvisation-clownensoin-clownenmilieudesoins-activity-7335569686203428864-dia9?utm_source=share&utm_medium=member_desktop" target="_blank">Découvrir le parcours</a>
+                    <b>Clownsultance</b>, c’est l’intervention clownesque en entreprise : une posture ludique, une observation fine, et une puissance de transformation collective.<br>
+                    Nos clowns improvisent en réunion, séminaire, ou atelier d’équipe : ils mettent en lumière les non-dits, tensions et émotions enfouies, et les rendent accessibles, légers et transformables.<br>
+                    Naïveté assumée, liberté d’expression, et humour poétique : tout pour dédramatiser, ouvrir la parole et imaginer ensemble de nouveaux possibles.<br>
+                    <a href="#clownsultance">En savoir plus</a>
                 </div>
             </div>
+        </div>
+    </section>
+    <section id="clownsultance">
+        <div class="clownsultance-panel">
+            <h3>Clownsultance : Le changement par le miroir du clown</h3>
+            <p>
+                Notre approche clownesque en contexte professionnel est bien plus qu’un moment ludique : c’est un outil puissant pour révéler les dynamiques d’équipe et transformer les collectifs.
+            </p>
+            <ul>
+                <li><b>Improvisation en équipe</b> : les situations vécues sont rejouées, les non-dits et tensions mis en lumière, avec humour et poésie.</li>
+                <li><b>Facilitation du dialogue</b> : le clown aide à dédramatiser, à ouvrir la parole et à créer un espace de dialogue créatif et sincère.</li>
+                <li><b>Prise de recul</b> : grâce à une mise en scène décalée, chacun·e peut prendre conscience des enjeux et imaginer de nouvelles pistes de changement.</li>
+                <li><b>Bénéfices</b> : cohésion, intelligence collective, confiance retrouvée, vision partagée et… du fun !</li>
+            </ul>
+            <p>
+                <i>Clownsultance, c’est la magie du changement par la créativité et l’absurde. Pour vos séminaires, réunions, ateliers d’équipe : osez le miroir du clown !</i>
+            </p>
         </div>
     </section>
     <section id="avis">
@@ -283,7 +387,6 @@
                 "Un accompagnement humain, créatif et pragmatique. Les équipes sont reparties avec de l’élan !"
                 <div class="avis-author">— Bruno, Directeur PME</div>
             </div>
-            <!-- Ajoute ici d'autres avis -->
         </div>
     </section>
     <section id="clients">
@@ -291,7 +394,6 @@
         <div class="clients-grid">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Logo_R%C3%A9publique_fran%C3%A7aise.png" alt="République Française" class="client-logo">
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logo_UCLouvain.png" alt="UCLouvain" class="client-logo">
-            <!-- Ajoute ici d'autres logos ou noms de clients -->
         </div>
     </section>
     <section id="contact">
@@ -311,7 +413,15 @@
             <div>📩 <a href="mailto:laboiteaprismes@gmail.com">laboiteaprismes@gmail.com</a></div>
         </div>
     </section>
-    <footer style="text-align:center; padding:2rem 0; color:#6a8ce8; font-size:1rem;">
+    <footer>
+        <div class="footer-social">
+            <a href="https://linkedin.com/" target="_blank" aria-label="LinkedIn">
+                <svg viewBox="0 0 32 32"><path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zm-18 27h-4v-13h4v13zm-2-15c-1.1 0-2-0.9-2-2s0.9-2 2-2c1.09 0 2 0.9 2 2 0 1.1-0.91 2-2 2zm17 15h-4v-7c0-1.68-1.32-3-3-3s-3 1.32-3 3v7h-4v-13h4v2c1.09-1.66 3.27-2 4.91-0.87 1.64 1.18 2.09 3.55 2.09 5.87v6zm0 0"/></svg>
+            </a>
+            <a href="https://facebook.com/" target="_blank" aria-label="Facebook">
+                <svg viewBox="0 0 32 32"><path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-12h-4v-4h4v-3c0-3.31 2.69-6 6-6h3v4h-3c-1.1 0-2 0.9-2 2v3h5l-1 4h-4v12h7c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"/></svg>
+            </a>
+        </div>
         &copy; 2025 La Boîte à Prismes. Tous droits réservés.
     </footer>
     <script>
