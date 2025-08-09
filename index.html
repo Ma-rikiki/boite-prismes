@@ -1,437 +1,448 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Boîte à Prismes - Conseil & Accompagnement RH</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', Arial, sans-serif;
-            background: linear-gradient(120deg, #e5e9fc 0%, #f8e5fc 100%);
-            min-height: 100vh;
-            color: #232046;
-        }
-        nav {
-            background: rgba(255,255,255,0.97);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-        .logo {
-            font-weight: 700;
-            font-size: 1.6rem;
-            background: linear-gradient(90deg,#6a8ce8,#e57fdc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .nav-links { list-style: none; display: flex; gap: 2rem; }
-        .nav-links a {
-            text-decoration: none;
-            color: #5c4fb9;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: #e57fdc; }
-        header {
-            background: transparent;
-            padding: 5rem 1rem 2rem 1rem;
-            text-align: center;
-            position: relative;
-        }
-        header h1 {
-            font-size: 2.7rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg,#6a8ce8,#e57fdc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        header p {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            background: rgba(255,255,255,0.92);
-            display: inline-block;
-            padding: 1.2rem 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 2px 12px rgba(106,140,232,0.08);
-            color: #232046;
-        }
-        .cta-buttons {
-            margin: 2rem 0;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .cta-button {
-            background: #6a8ce8;
-            color: #fff;
-            border: none;
-            border-radius: 25px;
-            padding: 0.8em 2em;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(106,140,232,0.08);
-            transition: background 0.3s, transform 0.2s;
-        }
-        .cta-button:hover { background: #e57fdc; transform: translateY(-2px) scale(1.03); }
-        section { max-width: 1200px; margin: auto; padding: 3rem 1rem; }
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 2.2rem;
-            text-align: center;
-            background: linear-gradient(90deg,#6a8ce8,#e57fdc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        /* Prisme central SVG */
-        .prisme-svg {
-            width: 180px;
-            margin: 0 auto 2.3rem auto;
-            display: block;
-        }
-        /* Prismes interactifs */
-        .prisms-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-        .prism-card {
-            background: rgba(255,255,255,0.98);
-            border-radius: 22px;
-            padding: 2rem 1.2rem;
-            box-shadow: 0 6px 24px 0 rgba(106,140,232,.18);
-            width: 280px;
-            text-align: center;
-            cursor: pointer;
-            transition: box-shadow 0.2s, transform 0.2s;
-            border: 2px solid #f0f3ff;
-        }
-        .prism-card:hover {
-            box-shadow: 0 12px 38px 0 rgba(229,127,220,.13);
-            transform: scale(1.03);
-            border-color: #e57fdc;
-        }
-        .prism-icon { font-size: 2.3rem; margin-bottom: 0.7rem; }
-        .prism-title { font-weight: 700; font-size: 1.13rem; margin-bottom: 0.6rem; }
-        .prism-short { font-size: 1rem; margin-bottom: 0; color: #4f4f6e;}
-        .prism-desc {
-            display: none;
-            margin-top: 1rem;
-            background: #f4f4fd;
-            border-radius: 10px;
-            padding: 1rem;
-            font-size: 0.98rem;
-            color: #444;
-            text-align: left;
-        }
-        .prism-card.active .prism-desc { display: block; }
-        /* Onglet Clownsultance */
-        .clownsultance-panel {
-            background: #fff5fc;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 4px 16px rgba(229,127,220,0.10);
-            max-width: 680px;
-            margin: 2.5rem auto 2rem auto;
-            text-align: left;
-        }
-        .clownsultance-panel h3 {
-            margin-top: 0;
-            font-size: 1.25rem;
-            color: #e57fdc;
-        }
-        .clownsultance-panel ul {
-            margin: 1.2rem 0 0 0;
-            padding: 0 0 0 1.2em;
-        }
-        /* Avis et clients */
-        .avis-grid, .clients-grid {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .avis-card {
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(106,140,232,0.08);
-            padding: 1.2rem 1rem 1rem 1rem;
-            width: 300px;
-            font-size: 1rem;
-            color: #333;
-        }
-        .avis-author { font-weight: 700; margin-top: 0.8rem; color: #6a8ce8; font-size: 0.95em;}
-        .client-logo {
-            height: 40px;
-            margin: 1rem;
-            filter: grayscale(0.2) brightness(0.95);
-        }
-        /* Contact */
-        .contact-form {
-            max-width: 420px;
-            margin: auto;
-            background: rgba(255,255,255,0.97);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(106,140,232,0.11);
-            display: flex;
-            flex-direction: column;
-            gap: 1.1rem;
-        }
-        .contact-form label { font-weight: 500; margin-bottom: 0.3rem; }
-        .contact-form input,
-        .contact-form textarea {
-            border: 1px solid #d1d5db;
-            border-radius: 10px;
-            padding: 0.7rem;
-            font-size: 1rem;
-            background: #f5f6fa;
-        }
-        .contact-form textarea { min-height: 80px; }
-        .contact-form button {
-            background: #6a8ce8;
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            padding: 0.8em 2em;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 0.6rem;
-            transition: background 0.3s;
-        }
-        .contact-form button:hover { background: #e57fdc;}
-        .contact-infos {
-            text-align: center;
-            margin-top: 2rem;
-            color: #232046;
-        }
-        .contact-infos a {
-            color: #6a8ce8;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .contact-infos a:hover { color: #e57fdc; }
-        /* Footer réseaux */
-        footer {
-            text-align: center;
-            padding: 2rem 0 1rem 0;
-            color: #6a8ce8;
-            font-size: 1rem;
-            background: transparent;
-        }
-        .footer-social {
-            margin: 0.8rem 0 0.3rem 0;
-        }
-        .footer-social a {
-            display: inline-block;
-            margin: 0 0.5rem;
-        }
-        .footer-social svg {
-            vertical-align: middle;
-            width: 28px;
-            height: 28px;
-            fill: #5c4fb9;
-            transition: fill 0.3s;
-        }
-        .footer-social a:hover svg { fill: #e57fdc; }
-        /* Responsive */
-        @media (max-width: 900px) {
-            .nav-container { padding: 1rem; }
-            .prisms-grid, .avis-grid, .clients-grid { gap: 1rem; }
-        }
-        @media (max-width: 600px) {
-            header h1 { font-size: 2.1rem; }
-            .section-title { font-size: 1.3rem;}
-            .prism-card, .avis-card { width: 100%; }
-            section { padding: 2rem 0.6rem; }
-            .prisme-svg { width: 100px;}
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>La Boîte à Prismes - Conseil RH</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      color: #232046;
+      background: #f7f5fa;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* Fond prisme pastel SVG en arrière-plan */
+    .prism-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.33;
+      background: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .prism-bg svg {
+      width: 70vw; min-width: 380px; max-width: 900px;
+      height: auto;
+      filter: blur(0.7px) drop-shadow(0 12px 60px #e57fdc66);
+    }
+    nav {
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      position: sticky;
+      top: 0; z-index: 10;
+      border-bottom: 1px solid #ece5f9;
+    }
+    .nav-container {
+      max-width: 1200px; margin: auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+    }
+    .logo {
+      font-weight: 700; font-size: 1.6rem;
+      background: linear-gradient(90deg,#6a8ce8,#e57fdc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+    .nav-links { list-style: none; display: flex; gap: 2rem; }
+    .nav-links a {
+      text-decoration: none; color: #5c4fb9; font-weight: 500; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #e57fdc;}
+    header {
+      padding: 4vw 1.2rem 1.2rem 1.2rem;
+      text-align: center; position: relative; z-index: 2;
+      margin-bottom: 0.5rem;
+    }
+    header h1 {
+      font-size: 2.3rem; margin-bottom: 0.7rem;
+      background: linear-gradient(90deg,#6a8ce8,#e57fdc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    header p {
+      background: rgba(255,255,255,0.93);
+      display: inline-block;
+      padding: 1.2rem 1.4rem;
+      border-radius: 20px;
+      box-shadow: 0 2px 12px rgba(106,140,232,0.08);
+      color: #232046;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      max-width: 600px;
+    }
+    .intro-btn {
+      margin-top: 1.3rem;
+      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .cta-button {
+      background: #6a8ce8;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 0.7em 1.7em;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(106,140,232,0.08);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .cta-button:hover { background: #e57fdc; transform: translateY(-2px) scale(1.03);}
+    section { max-width: 1200px; margin: auto; padding: 3rem 1rem;}
+    .section-title {
+      font-size: 1.9rem; margin-bottom: 2rem; text-align: center;
+      background: linear-gradient(90deg,#6a8ce8,#e57fdc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    /* Filtres badges */
+    .filters-bar {
+      display: flex; gap: 1.1rem; justify-content: center; margin-bottom: 2.2rem;
+      flex-wrap: wrap;
+      z-index: 2;
+      position: relative;
+    }
+    .filter-badge {
+      background: #e7e0fa;
+      color: #5c4fb9;
+      border: none;
+      border-radius: 18px;
+      padding: 0.6em 1.2em;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 2px 12px rgba(160,140,232,0.08);
+      cursor: pointer;
+      transition: background 0.26s, color 0.26s, transform 0.18s;
+      outline: none;
+      border: 2px solid transparent;
+      display: flex; align-items: center;
+      gap: 0.5em;
+    }
+    .filter-badge.active {
+      background: linear-gradient(90deg,#6a8ce8 55%,#e57fdc 98%);
+      color: #fff;
+      border-color: #e57fdc;
+      transform: scale(1.07);
+      box-shadow: 0 4px 22px rgba(229,127,220,0.13);
+    }
+    /* Grille de prismes */
+    .prisms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+      z-index: 2;
+      position: relative;
+    }
+    /* Carte prisme */
+    .prism-card {
+      background: rgba(255,255,255,0.98);
+      border-radius: 20px;
+      padding: 2rem 1.2rem 1.2rem 1.2rem;
+      box-shadow: 0 6px 24px 0 rgba(106,140,232,.15);
+      position: relative;
+      cursor: pointer;
+      transition: box-shadow 0.22s, transform 0.22s;
+      border: 2px solid #f0f3ff;
+      overflow: hidden;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      z-index: 2;
+    }
+    .prism-card:hover {
+      box-shadow: 0 12px 38px 0 rgba(229,127,220,.13);
+      transform: scale(1.03);
+      border-color: #e57fdc;
+    }
+    .prism-header {
+      display: flex; align-items: center; gap: 0.9em; margin-bottom: 0.4em; width: 100%;
+    }
+    .prism-icon { font-size: 2.1rem;}
+    .prism-title { font-weight: 700; font-size: 1.19rem; margin-bottom: 0.2em;}
+    .prism-short { font-size: 1rem; color: #4f4f6e; margin-bottom: 0.7em;}
+    .prism-tags {
+      display: flex; gap: 0.6em; flex-wrap: wrap; margin-bottom: 0.5em;
+    }
+    .prism-tag {
+      background: #f5f4fa;
+      color: #6a8ce8;
+      border-radius: 9px;
+      padding: 0.2em 0.7em;
+      font-size: 0.88em;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    /* Expansion */
+    .prism-expansion {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(.4,0,.2,1), opacity 0.35s ease;
+      font-size: 0.98rem;
+      background: #f4f4fd;
+      border-radius: 10px;
+      padding: 0.1rem 0.2rem 0.1rem 0.2rem;
+      margin-top: 0.8em;
+      color: #444;
+    }
+    .prism-card.active .prism-expansion {
+      max-height: 600px;
+      opacity: 1;
+      padding: 1rem 0.7rem 1rem 0.7rem;
+    }
+    /* Expansion titre clownsultance */
+    .prism-card.clown .prism-title {
+      color: #e57fdc;
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .nav-container { padding: 1rem;}
+      section { padding: 2rem 0.5rem;}
+      .prisms-grid { gap: 1.1rem;}
+      .filters-bar { gap: 0.5rem;}
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.5rem;}
+      .section-title { font-size: 1.1rem;}
+      .prism-card { padding: 1.1rem 0.7rem;}
+      .prism-header { gap: 0.4em;}
+      .prism-title { font-size: 1rem;}
+      .prism-expansion { font-size: 0.92rem;}
+      .prism-bg svg { width: 100vw; min-width: 220px; max-width: 430px;}
+    }
+    /* Footer réseaux */
+    footer {
+      text-align: center;
+      padding: 2.3rem 0 1rem 0;
+      color: #6a8ce8;
+      font-size: 1rem;
+      background: transparent;
+      z-index: 2; position: relative;
+    }
+    .footer-social {
+      margin: 0.8rem 0 0.3rem 0;
+    }
+    .footer-social a {
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+    .footer-social svg {
+      vertical-align: middle;
+      width: 28px;
+      height: 28px;
+      fill: #5c4fb9;
+      transition: fill 0.3s;
+    }
+    .footer-social a:hover svg { fill: #e57fdc;}
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo">La Boîte à Prismes</div>
-            <ul class="nav-links">
-                <li><a href="#home">Accueil</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#clownsultance">Clownsultance</a></li>
-                <li><a href="#avis">Avis</a></li>
-                <li><a href="#clients">Nos clients</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+  <!-- Fond prisme pastel SVG -->
+  <div class="prism-bg">
+    <svg viewBox="0 0 800 600">
+      <defs>
+        <linearGradient id="rainbowglass" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#e57fdc" stop-opacity="0.7"/>
+          <stop offset="35%" stop-color="#f5d564" stop-opacity="0.5"/>
+          <stop offset="65%" stop-color="#84eba2" stop-opacity="0.5"/>
+          <stop offset="85%" stop-color="#6a8ce8" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#fff" stop-opacity="0.5"/>
+        </linearGradient>
+        <radialGradient id="light" cx="70%" cy="40%" r="80%" fx="70%" fy="40%">
+          <stop offset="0%" stop-color="#fff" stop-opacity="0.33"/>
+          <stop offset="80%" stop-color="#e57fdc" stop-opacity="0.09"/>
+          <stop offset="100%" stop-color="#fff" stop-opacity="0.02"/>
+        </radialGradient>
+      </defs>
+      <!-- Prisme -->
+      <polygon points="400,120 650,480 150,480"
+        fill="url(#rainbowglass)" stroke="#e57fdc" stroke-width="8" opacity="0.88"/>
+      <!-- Rayons arc-en-ciel -->
+      <rect x="380" y="480" width="40" height="90" fill="url(#rainbowglass)" rx="12" opacity="0.7"/>
+      <rect x="395" y="120" width="10" height="360" fill="url(#light)" opacity="0.3"/>
+      <!-- Halo de lumière -->
+      <ellipse cx="400" cy="140" rx="110" ry="30" fill="url(#light)" opacity="0.6"/>
+    </svg>
+  </div>
+  <nav>
+    <div class="nav-container">
+      <div class="logo">La Boîte à Prismes</div>
+      <ul class="nav-links">
+        <li><a href="#home">Accueil</a></li>
+        <li><a href="#prismes">Prismes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  <header id="home">
+    <h1>Accompagnement du changement humain & organisationnel</h1>
+    <p>Guillaume accompagne les organisations dans des moments-clés : transformation RH, fusion, crise, perte de repères. <br>
+      <span style="font-size:1.05em;">
+        Sa mission : éclairer le changement sous tous ses angles, grâce à une approche systémique, créative et humaine.
+      </span>
+    </p>
+    <div class="intro-btn">
+      <a href="#prismes"><button class="cta-button">Découvrir les prismes</button></a>
+      <a href="#contact"><button class="cta-button">Prendre contact</button></a>
+    </div>
+  </header>
+  <section id="prismes">
+    <h2 class="section-title">🌈 Les Prismes d’intervention</h2>
+    <!-- Filtres interactifs -->
+    <div class="filters-bar" id="filters-bar">
+      <button class="filter-badge active" data-filter="all">Tous</button>
+      <button class="filter-badge" data-filter="systemique">Systémique</button>
+      <button class="filter-badge" data-filter="creativite">Créativité relationnelle</button>
+      <button class="filter-badge" data-filter="coaching">Coaching</button>
+      <button class="filter-badge" data-filter="conviction">Conviction</button>
+    </div>
+    <!-- Grille de prismes -->
+    <div class="prisms-grid" id="prisms-grid">
+      <!-- Carte 1 -->
+      <div class="prism-card" data-tags="systemique conviction coaching">
+        <div class="prism-header">
+          <span class="prism-icon">💡</span>
+          <span class="prism-title">Consultance RH & Organisation</span>
         </div>
-    </nav>
-    <header id="home">
-        <h1>Qui suis-je ?</h1>
-        <p>
-            Je suis Guillaume.<br>
-            J’accompagne les entreprises et organisations (PME, associations, services publics) dans leurs projets de transformation RH ou organisationnelle, à des moments clés.<br>
-            <span style="font-size:1.05em;">
-            👉 Changement d’organisation, fusion, crise managériale, perte de repères, déconnexion entre vision et réalité du terrain…<br>
-            Vous constatez que stratégie, structures et humains ne vibrent plus à l’unisson ? Je vous accompagne avec vos équipes pour remettre du sens, du souffle, et de la cohérence.<br>
-            🎯 <b>Ma mission</b> : faciliter des changements créatifs et réalistes.
-            </span>
-        </p>
-        <!-- SVG Prisme visuel central -->
-        <svg class="prisme-svg" viewBox="0 0 100 100">
-            <!-- Triangle prisme -->
-            <polygon points="50,10 90,85 10,85"
-                fill="url(#glass)" stroke="#6a8ce8" stroke-width="2"/>
-            <!-- Effet arc-en-ciel -->
-            <defs>
-                <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#e57fdc"/>
-                    <stop offset="60%" stop-color="#6a8ce8"/>
-                    <stop offset="100%" stop-color="#fff"/>
-                </linearGradient>
-                <linearGradient id="rainbow" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#e57fdc" />
-                    <stop offset="20%" stop-color="#f5d564" />
-                    <stop offset="40%" stop-color="#84eba2" />
-                    <stop offset="60%" stop-color="#6a8ce8" />
-                    <stop offset="80%" stop-color="#f8e5fc" />
-                    <stop offset="100%" stop-color="#fff" />
-                </linearGradient>
-            </defs>
-            <!-- Rayon arc-en-ciel sortant du prisme -->
-            <rect x="35" y="85" width="30" height="10" fill="url(#rainbow)" rx="3" />
-            <rect x="48" y="15" width="4" height="70" fill="url(#rainbow)" opacity="0.5" />
-        </svg>
-        <div class="cta-buttons">
-            <a href="#services"><button class="cta-button">Découvrir les services</button></a>
-            <a href="#contact"><button class="cta-button">Réserver un entretien</button></a>
+        <div class="prism-short">Gestion de projet, transformation, interim</div>
+        <div class="prism-tags">
+          <span class="prism-tag">Systémique</span>
+          <span class="prism-tag">Conviction</span>
+          <span class="prism-tag">Coaching</span>
         </div>
-    </header>
-    <section id="services">
-        <h2 class="section-title">🌈 Services & Prismes d’intervention</h2>
-        <p style="text-align:center; margin-bottom:2rem;">
-            Chaque prisme éclaire une autre facette du changement — humaine, stratégique, opérationnelle.<br>
-            Un prisme, c’est une manière d’analyser autrement votre projet en changeant le point de vue.<br>
-            Grâce à lui, les nuances, les tensions et les potentiels d’un changement deviennent visibles — et mobilisables.
-        </p>
-        <div class="prisms-grid">
-            <div class="prism-card" onclick="togglePrism(this)">
-                <div class="prism-icon">💡</div>
-                <div class="prism-title">Consultance RH & Gestion de projets</div>
-                <div class="prism-short">Changement, interim, organisation</div>
-                <div class="prism-desc">
-                    Une expérience solide, forgée depuis 2005 dans des structures de 80 à 1.200 personnes, publiques comme privées.<br>
-                    Management, automatisation de processus, harmonisation des fonctions et salaires, développement de la polyvalence, réorganisation post-fusion…
-                    <br><a href="https://www.linkedin.com/posts/gvanneyverseel_improvisation-clownensoin-clownenmilieudesoins-activity-7335569686203428864-dia9?utm_source=share&utm_medium=member_desktop" target="_blank">Voir sur LinkedIn</a>
-                </div>
-            </div>
-            <div class="prism-card" onclick="togglePrism(this)">
-                <div class="prism-icon">🚀</div>
-                <div class="prism-title">Coaching de transition professionnelle</div>
-                <div class="prism-short">Élan, clarté, confort</div>
-                <div class="prism-desc">
-                    Écoute et présence pour aider à retrouver de l’élan et de la clarté dans les périodes de transition.<br>
-                    Un accompagnement personnalisé pour les managers, dirigeant·es, équipes en mutation.
-                    <br><a href="https://www.linkedin.com/posts/gvanneyverseel_coaching-transitionprofessionnelle-changement-activity-7334135233363009538-Zb6d?utm_source=share&utm_medium=member_desktop" target="_blank">Voir sur LinkedIn</a>
-                </div>
-            </div>
-            <div class="prism-card" onclick="togglePrism(this)">
-                <div class="prism-icon">🤡</div>
-                <div class="prism-title">Clownsultance</div>
-                <div class="prism-short">Créativité relationnelle</div>
-                <div class="prism-desc">
-                    <b>Clownsultance</b>, c’est l’intervention clownesque en entreprise : une posture ludique, une observation fine, et une puissance de transformation collective.<br>
-                    Nos clowns improvisent en réunion, séminaire, ou atelier d’équipe : ils mettent en lumière les non-dits, tensions et émotions enfouies, et les rendent accessibles, légers et transformables.<br>
-                    Naïveté assumée, liberté d’expression, et humour poétique : tout pour dédramatiser, ouvrir la parole et imaginer ensemble de nouveaux possibles.<br>
-                    <a href="#clownsultance">En savoir plus</a>
-                </div>
-            </div>
+        <div class="prism-expansion">
+          Une expérience solide depuis 2005, dans des structures de 80 à 1.200 personnes, publiques et privées. <br>
+          Management, automatisation, harmonisation des fonctions et salaires, développement de la polyvalence, réorganisation post-fusion.<br>
+          <b>Valeur ajoutée :</b> diagnostic systémique, mise en cohérence, changements réalistes et humains.
         </div>
-    </section>
-    <section id="clownsultance">
-        <div class="clownsultance-panel">
-            <h3>Clownsultance : Le changement par le miroir du clown</h3>
-            <p>
-                Notre approche clownesque en contexte professionnel est bien plus qu’un moment ludique : c’est un outil puissant pour révéler les dynamiques d’équipe et transformer les collectifs.
-            </p>
-            <ul>
-                <li><b>Improvisation en équipe</b> : les situations vécues sont rejouées, les non-dits et tensions mis en lumière, avec humour et poésie.</li>
-                <li><b>Facilitation du dialogue</b> : le clown aide à dédramatiser, à ouvrir la parole et à créer un espace de dialogue créatif et sincère.</li>
-                <li><b>Prise de recul</b> : grâce à une mise en scène décalée, chacun·e peut prendre conscience des enjeux et imaginer de nouvelles pistes de changement.</li>
-                <li><b>Bénéfices</b> : cohésion, intelligence collective, confiance retrouvée, vision partagée et… du fun !</li>
-            </ul>
-            <p>
-                <i>Clownsultance, c’est la magie du changement par la créativité et l’absurde. Pour vos séminaires, réunions, ateliers d’équipe : osez le miroir du clown !</i>
-            </p>
+      </div>
+      <!-- Carte 2 -->
+      <div class="prism-card" data-tags="coaching creativite systemique">
+        <div class="prism-header">
+          <span class="prism-icon">🚀</span>
+          <span class="prism-title">Coaching de transition professionnelle</span>
         </div>
-    </section>
-    <section id="avis">
-        <h2 class="section-title">🗣️ Avis</h2>
-        <div class="avis-grid">
-            <div class="avis-card">
-                "Guillaume nous a permis de remettre du sens dans la transformation de notre service. Écoute, méthode et bienveillance."
-                <div class="avis-author">— Céline, Responsable RH</div>
-            </div>
-            <div class="avis-card">
-                "Un accompagnement humain, créatif et pragmatique. Les équipes sont reparties avec de l’élan !"
-                <div class="avis-author">— Bruno, Directeur PME</div>
-            </div>
+        <div class="prism-short">Élan, clarté, confort</div>
+        <div class="prism-tags">
+          <span class="prism-tag">Coaching</span>
+          <span class="prism-tag">Créativité relationnelle</span>
+          <span class="prism-tag">Systémique</span>
         </div>
-    </section>
-    <section id="clients">
-        <h2 class="section-title">🤝 Nos clients</h2>
-        <div class="clients-grid">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Logo_R%C3%A9publique_fran%C3%A7aise.png" alt="République Française" class="client-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logo_UCLouvain.png" alt="UCLouvain" class="client-logo">
+        <div class="prism-expansion">
+          Accompagnement personnalisé pour managers, dirigeant·es, équipes en mutation.<br>
+          Écoute active, outils de clarification, facilitation du rebond.<br>
+          <b>Objectif :</b> retrouver de l’élan et du sens dans la transition.
         </div>
-    </section>
-    <section id="contact">
-        <h2 class="section-title">👋 Contact / Réserver un entretien</h2>
-        <form class="contact-form" action="mailto:laboiteaprismes@gmail.com" method="POST" enctype="text/plain">
-            <label for="name">Nom</label>
-            <input type="text" id="name" name="Nom" required>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="Email" required>
-            <label for="message">Message</label>
-            <textarea id="message" name="Message" required></textarea>
-            <button type="submit">Envoyer</button>
-        </form>
-        <div class="contact-infos">
-            <p>Ou contactez-moi directement :</p>
-            <div>📱 <a href="tel:+32497924475">0497 / 92 44 75</a></div>
-            <div>📩 <a href="mailto:laboiteaprismes@gmail.com">laboiteaprismes@gmail.com</a></div>
+      </div>
+      <!-- Carte 3 Clownsultance -->
+      <div class="prism-card clown" data-tags="creativite systemique conviction">
+        <div class="prism-header">
+          <span class="prism-icon">🤡</span>
+          <span class="prism-title">Clownsultance</span>
         </div>
-    </section>
-    <footer>
-        <div class="footer-social">
-            <a href="https://linkedin.com/" target="_blank" aria-label="LinkedIn">
-                <svg viewBox="0 0 32 32"><path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zm-18 27h-4v-13h4v13zm-2-15c-1.1 0-2-0.9-2-2s0.9-2 2-2c1.09 0 2 0.9 2 2 0 1.1-0.91 2-2 2zm17 15h-4v-7c0-1.68-1.32-3-3-3s-3 1.32-3 3v7h-4v-13h4v2c1.09-1.66 3.27-2 4.91-0.87 1.64 1.18 2.09 3.55 2.09 5.87v6zm0 0"/></svg>
-            </a>
-            <a href="https://facebook.com/" target="_blank" aria-label="Facebook">
-                <svg viewBox="0 0 32 32"><path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-12h-4v-4h4v-3c0-3.31 2.69-6 6-6h3v4h-3c-1.1 0-2 0.9-2 2v3h5l-1 4h-4v12h7c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"/></svg>
-            </a>
+        <div class="prism-short">Intervention clownesque en contexte pro</div>
+        <div class="prism-tags">
+          <span class="prism-tag">Créativité relationnelle</span>
+          <span class="prism-tag">Systémique</span>
+          <span class="prism-tag">Conviction</span>
         </div>
-        &copy; 2025 La Boîte à Prismes. Tous droits réservés.
-    </footer>
-    <script>
-    // Prismes interactifs
-    function togglePrism(card) {
-        document.querySelectorAll('.prism-card').forEach(function(c) {
-            if(c !== card) c.classList.remove('active');
+        <div class="prism-expansion">
+          <b>Clownsultance</b>, c’est l’intervention clownesque en entreprise : posture ludique, observation fine, puissance de transformation collective.<br>
+          Les clowns improvisent lors de réunions, séminaires ou événements d’équipe : ils mettent en scène les situations vécues, jouent avec les non-dits et tensions, rendent visibles les émotions enfouies.<br>
+          Grâce à leur naïveté et leur liberté d’expression, ils dédramatisent, ouvrent la parole et créent un espace de dialogue créatif. <br>
+          <i>La clownsultance, c’est la magie du changement par la poésie, l’absurde et l’intelligence collective.</i>
+        </div>
+      </div>
+      <!-- Carte 4 -->
+      <div class="prism-card" data-tags="conviction creativite coaching">
+        <div class="prism-header">
+          <span class="prism-icon">🧠</span>
+          <span class="prism-title">Ateliers de créativité & intelligence collective</span>
+        </div>
+        <div class="prism-short">Innovation, cohésion, énergie collective</div>
+        <div class="prism-tags">
+          <span class="prism-tag">Conviction</span>
+          <span class="prism-tag">Créativité relationnelle</span>
+          <span class="prism-tag">Coaching</span>
+        </div>
+        <div class="prism-expansion">
+          Ateliers participatifs pour stimuler la créativité, renforcer la cohésion et générer des idées neuves.<br>
+          Animation, facilitation, outils d’intelligence collective pour dynamiser les équipes et faire émerger des solutions innovantes.
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact">
+    <h2 class="section-title">👋 Contact</h2>
+    <form class="contact-form" action="mailto:laboiteaprismes@gmail.com" method="POST" enctype="text/plain" style="max-width:420px; margin:auto; background:rgba(255,255,255,0.97);border-radius:20px;padding:2rem;box-shadow:0 4px 20px rgba(106,140,232,0.11);display:flex;flex-direction:column;gap:1.1rem;">
+      <label for="name">Nom</label>
+      <input type="text" id="name" name="Nom" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="Email" required>
+      <label for="message">Message</label>
+      <textarea id="message" name="Message" required></textarea>
+      <button type="submit" style="background:#6a8ce8;color:#fff;border:none;border-radius:20px;padding:0.8em 2em;font-size:1rem;font-weight:600;cursor:pointer;margin-top:0.6rem;transition:background 0.3s;">Envoyer</button>
+    </form>
+    <div style="text-align:center;margin-top:2rem;color:#232046;">
+      <p>Ou contactez-moi directement :</p>
+      <div>📱 <a href="tel:+32497924475" style="color:#6a8ce8;text-decoration:none;font-weight:500;">0497 / 92 44 75</a></div>
+      <div>📩 <a href="mailto:laboiteaprismes@gmail.com" style="color:#6a8ce8;text-decoration:none;font-weight:500;">laboiteaprismes@gmail.com</a></div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-social">
+      <a href="https://linkedin.com/" target="_blank" aria-label="LinkedIn">
+        <svg viewBox="0 0 32 32"><path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zm-18 27h-4v-13h4v13zm-2-15c-1.1 0-2-0.9-2-2s0.9-2 2-2c1.09 0 2 0.9 2 2 0 1.1-0.91 2-2 2zm17 15h-4v-7c0-1.68-1.32-3-3-3s-3 1.32-3 3v7h-4v-13h4v2c1.09-1.66 3.27-2 4.91-0.87 1.64 1.18 2.09 3.55 2.09 5.87v6zm0 0"/></svg>
+      </a>
+      <a href="https://facebook.com/" target="_blank" aria-label="Facebook">
+        <svg viewBox="0 0 32 32"><path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-12h-4v-4h4v-3c0-3.31 2.69-6 6-6h3v4h-3c-1.1 0-2 0.9-2 2v3h5l-1 4h-4v12h7c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"/></svg>
+      </a>
+    </div>
+    &copy; 2025 La Boîte à Prismes. Tous droits réservés.
+  </footer>
+  <script>
+    // Filtres interactifs
+    const filtersBar = document.getElementById('filters-bar');
+    const prismCards = Array.from(document.querySelectorAll('.prism-card'));
+    filtersBar.addEventListener('click', function(e){
+      if(e.target.classList.contains('filter-badge')) {
+        document.querySelectorAll('.filter-badge').forEach(badge=>badge.classList.remove('active'));
+        e.target.classList.add('active');
+        const filter = e.target.getAttribute('data-filter');
+        prismCards.forEach(card=>{
+          if(filter === 'all' || card.getAttribute('data-tags').includes(filter)) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
         });
-        card.classList.toggle('active');
-    }
-    </script>
+      }
+    });
+    // Prismes expansion
+    prismCards.forEach(card=>{
+      card.addEventListener('click', function(){
+        if(card.classList.contains('active')) {
+          card.classList.remove('active');
+        } else {
+          prismCards.forEach(c=>c.classList.remove('active'));
+          card.classList.add('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
