@@ -3,25 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon site</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>La Boîte à Prismes - Conseil & Accompagnement RH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --text: #333;
+            --light: #f9f9fb;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background: white;
+            line-height: 1.6;
+        }
+        nav {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+        .hero-content {
+            max-width: 800px;
+            margin-top: 6rem;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero-subtitle { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; }
+        .hero-pitch { font-size: 1.1rem; margin-bottom: 2.5rem; }
+        .cta-button {
+            background: white;
+            color: var(--primary);
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            display: inline-block;
+        }
+        .cta-button:hover {
+            background: var(--light);
+            transform: translateY(-2px) scale(1.05);
+        }
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .prisms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .prism-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        .prism-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .prism-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .prism-card h3 { margin-bottom: 1rem; font-size: 1.3rem; }
+        .conviction {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: auto;
+        }
+        .contact {
+            background: var(--primary);
+            color: white;
+            border-radius: 15px;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .contact-info {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+        .contact a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .contact a:hover {
+            text-decoration: underline;
+            color: var(--secondary);
+        }
+        @media (max-width: 900px) {
+            .nav-container { padding: 1rem; }
+            section { padding: 3rem 1rem; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .prisms-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 500px) {
+            .nav-links { gap: 1rem; }
+            .hero-content { margin-top: 4rem; }
+            .section-title { font-size: 1.3rem; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Bienvenue sur mon site</h1>
-    </header>
-    <main>
-        <section>
-            <h2>À propos</h2>
-            <p>Ceci est un exemple de contenu pour mon site.</p>
-        </section>
-        <section>
-            <h2>Contact</h2>
-            <p>Vous pouvez me contacter à l'adresse email@example.com.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 Mon site. Tous droits réservés.</p>
-    </footer>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">La Boîte à Prismes</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#approche">Approche</a></li>
+                <li><a href="#conviction">Conviction</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>La Boîte à Prismes</h1>
+            <p class="hero-subtitle">Décaler les perspectives, ouvrir les horizons</p>
+            <p class="hero-pitch">🌱 J’accompagne les transformations humaines et organisationnelles.<br>
+            Vous traversez un moment charnière ?<br>
+            Je vous aide, avec vos équipes, à remettre du sens, du souffle et de la cohérence.</p>
+            <a href="#contact" class="cta-button">Parlons-en</a>
+        </div>
+    </section>
+    <section id="approche">
+        <h2 class="section-title">Mes 3 prismes d’intervention</h2>
+        <div class="prisms-grid">
+            <div class="prism-card">
+                <div class="prism-icon">💼</div>
+                <h3>Expertise RH & gestion de projets</h3>
+                <p>Depuis 2005, en structures publiques et privées de 80 à 1.200 personnes.<br>
+                Je relie stratégie et action : simplification, automatisation, harmonisation, réorganisation post-fusion…</p>
+            </div>
+            <div class="prism-card">
+                <div class="prism-icon">🎭</div>
+                <h3>Créativité relationnelle</h3>
+                <p>Une écoute fine et une présence sincère, nourries par l’improvisation théâtrale et le clown en milieux de soins.</p>
+            </div>
+            <div class="prism-card">
+                <div class="prism-icon">🚀</div>
+                <h3>Coaching professionnel</h3>
+                <p>Un cadre sécurisant pour retrouver de l’élan, de la clarté et du confort dans les transitions.</p>
+            </div>
+        </div>
+    </section>
+    <section id="conviction">
+        <h2 class="section-title">✨ Ma conviction</h2>
+        <div class="conviction">
+            Chaque organisation a ses propres <strong>couleurs</strong>, <strong>sons</strong> et <strong>dynamiques</strong>.<br>
+            Mon rôle ? Les capter, les amplifier, et les mettre en mouvement…<br>
+            dans une direction choisie ensemble.
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <h2>📞 Et si on en parlait ?</h2>
+        <p>Un projet RH ou organisationnel à un tournant ?</p>
+        <div class="contact-info">
+            <div>📩 <a href="mailto:laboiteaprismes@gmail.com">laboiteaprismes@gmail.com</a></div>
+            <div>📱 <a href="tel:+32497924475">0497 / 92 44 75</a></div>
+        </div>
+    </section>
 </body>
 </html>
