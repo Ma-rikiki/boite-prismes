@@ -3,44 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boite Prismes</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>La Boîte à Prismes - Conseil & Accompagnement RH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(120deg, #6a8ce8 0%, #e57fdc 70%, #fff 100%);
+            min-height: 100vh;
+            color: #232046;
+        }
+        nav {
+            background: rgba(255,255,255,0.92);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.6rem;
+            background: linear-gradient(90deg,#6a8ce8,#e57fdc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links a {
+            text-decoration: none;
+            color: #5c4fb9;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: #e57fdc; }
+        header {
+            background: transparent;
+            padding: 5rem 1rem 2rem 1rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.7rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg,#6a8ce8,#e57fdc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .cta-buttons {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .cta-button {
+            background: #6a8ce8;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 0.8em 2em;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(106,140,232,0.08);
+            transition: background 0.3s, transform 0.2s;
+        }
+        .cta-button:hover { background: #e57fdc; transform: translateY(-2px) scale(1.03); }
+        section { max-width: 1200px; margin: auto; padding: 3rem 1rem; }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(90deg,#6a8ce8,#e57fdc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Prismes */
+        .prisms-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .prism-card {
+            background: rgba(255,255,255,0.98);
+            border-radius: 20px;
+            padding: 2rem 1.2rem;
+            box-shadow: 0 6px 24px 0 rgba(106,140,232,.15);
+            width: 280px;
+            text-align: center;
+            cursor: pointer;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .prism-card:hover {
+            box-shadow: 0 12px 30px 0 rgba(229,127,220,.13);
+            transform: scale(1.03);
+        }
+        .prism-icon { font-size: 2.3rem; margin-bottom: 0.7rem; }
+        .prism-title { font-weight: 700; font-size: 1.13rem; margin-bottom: 0.8rem; }
+        .prism-short { font-size: 1rem; margin-bottom: 0; }
+        .prism-desc {
+            display: none;
+            margin-top: 1rem;
+            background: #f4f4fd;
+            border-radius: 10px;
+            padding: 1rem;
+            font-size: 0.98rem;
+            color: #444;
+            text-align: left;
+        }
+        .prism-card.active .prism-desc { display: block; }
+        /* Avis et clients */
+        .avis-grid, .clients-grid {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .avis-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(106,140,232,0.08);
+            padding: 1.2rem 1rem 1rem 1rem;
+            width: 300px;
+            font-size: 1rem;
+            color: #333;
+        }
+        .avis-author { font-weight: 700; margin-top: 0.8rem; color: #6a8ce8; font-size: 0.95em;}
+        .client-logo {
+            height: 40px;
+            margin: 1rem;
+            filter: grayscale(0.2) brightness(0.95);
+        }
+        /* Contact */
+        .contact-form {
+            max-width: 420px;
+            margin: auto;
+            background: rgba(255,255,255,0.97);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(106,140,232,0.11);
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+        .contact-form label { font-weight: 500; margin-bottom: 0.3rem; }
+        .contact-form input,
+        .contact-form textarea {
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            padding: 0.7rem;
+            font-size: 1rem;
+            background: #f5f6fa;
+        }
+        .contact-form textarea { min-height: 80px; }
+        .contact-form button {
+            background: #6a8ce8;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 0.8em 2em;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.6rem;
+            transition: background 0.3s;
+        }
+        .contact-form button:hover { background: #e57fdc;}
+        .contact-infos {
+            text-align: center;
+            margin-top: 2rem;
+            color: #232046;
+        }
+        .contact-infos a {
+            color: #6a8ce8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .contact-infos a:hover { color: #e57fdc; }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .nav-container { padding: 1rem; }
+            .prisms-grid, .avis-grid, .clients-grid { gap: 1rem; }
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 2.1rem; }
+            .section-title { font-size: 1.3rem;}
+            .prism-card, .avis-card { width: 100%; }
+            section { padding: 2rem 0.6rem; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Bienvenue à Boite Prismes</h1>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">La Boîte à Prismes</div>
+            <ul class="nav-links">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#avis">Avis</a></li>
+                <li><a href="#clients">Nos clients</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <header id="home">
+        <h1>Qui suis-je ?</h1>
+        <p>
+            Je suis Guillaume.<br>
+            J’accompagne les entreprises et organisations (PME, associations, services publics) dans leurs projets de transformation RH ou organisationnelle, à des moments clés.<br>
+            <span style="font-size:1.05em;">
+            👉 Changement d’organisation, fusion, crise managériale, perte de repères, déconnexion entre vision et réalité du terrain…<br>
+            Vous constatez que stratégie, structures et humains ne vibrent plus à l’unisson ? Je vous accompagne avec vos équipes pour remettre du sens, du souffle, et de la cohérence.<br>
+            🎯 <b>Ma mission</b> : faciliter des changements créatifs et réalistes.
+            </span>
+        </p>
+        <div class="cta-buttons">
+            <a href="#services"><button class="cta-button">Découvrir les services</button></a>
+            <a href="#contact"><button class="cta-button">Réserver un entretien</button></a>
+        </div>
     </header>
-    <main>
-        <section id="services">
-            <h2>Prismes Interactifs</h2>
-            <!-- Contenu sur les prismes interactifs -->
-        </section>
-        <section id="contact">
-            <h2>Contactez-nous</h2>
-            <form>
-                <label for="name">Nom:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" required></textarea>
-                
-                <button type="submit">Envoyer</button>
-            </form>
-        </section>
-        <section id="avis">
-            <h2>Avis</h2>
-            <!-- Contenu des avis -->
-        </section>
-        <section id="clients">
-            <h2>Nos Clients</h2>
-            <!-- Contenu sur les clients -->
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 Boite Prismes. Tous droits réservés.</p>
+    <section id="services">
+        <h2 class="section-title">🌈 Services & Prismes d’intervention</h2>
+        <p style="text-align:center; margin-bottom:2rem;">
+            Chaque prisme éclaire une autre facette du changement — humaine, stratégique, opérationnelle.<br>
+            Un prisme, c’est une manière d’analyser autrement votre projet en changeant le point de vue.<br>
+            Grâce à lui, les nuances, les tensions et les potentiels d’un changement deviennent visibles — et mobilisables.
+        </p>
+        <div class="prisms-grid">
+            <div class="prism-card" onclick="togglePrism(this)">
+                <div class="prism-icon">💡</div>
+                <div class="prism-title">Consultance RH & Gestion de projets</div>
+                <div class="prism-short">Changement, interim, organisation</div>
+                <div class="prism-desc">
+                    Forgée depuis 2005 dans des structures de 80 à 1.200 personnes, publiques comme privées.<br>
+                    Expérience de management : automatisation de processus, harmonisation des fonctions et salaires, développement de la polyvalence, réorganisation post-fusion…
+                    <br><a href="https://www.linkedin.com/posts/gvanneyverseel_improvisation-clownensoin-clownenmilieudesoins-activity-7335569686203428864-dia9?utm_source=share&utm_medium=member_desktop" target="_blank">Voir sur LinkedIn</a>
+                </div>
+            </div>
+            <div class="prism-card" onclick="togglePrism(this)">
+                <div class="prism-icon">🚀</div>
+                <div class="prism-title">Coaching de transition professionnelle</div>
+                <div class="prism-short">Élan, clarté, confort</div>
+                <div class="prism-desc">
+                    Présence, écoute et parole ajustée pour aider à retrouver de l’élan et de la clarté dans les périodes de transition.
+                    <br><a href="https://www.linkedin.com/posts/gvanneyverseel_coaching-transitionprofessionnelle-changement-activity-7334135233363009538-Zb6d?utm_source=share&utm_medium=member_desktop" target="_blank">Voir sur LinkedIn</a>
+                </div>
+            </div>
+            <div class="prism-card" onclick="togglePrism(this)">
+                <div class="prism-icon">🤡</div>
+                <div class="prism-title">Clownsultance</div>
+                <div class="prism-short">Créativité relationnelle</div>
+                <div class="prism-desc">
+                    Écoute fine, liens sincères, co-construction. Compétences développées dans l’impro, le clown en milieux de soins, et l’accompagnement des équipes.
+                    <br><a href="https://www.linkedin.com/posts/gvanneyverseel_improvisation-clownensoin-clownenmilieudesoins-activity-7335569686203428864-dia9?utm_source=share&utm_medium=member_desktop" target="_blank">Découvrir le parcours</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="avis">
+        <h2 class="section-title">🗣️ Avis</h2>
+        <div class="avis-grid">
+            <div class="avis-card">
+                "Guillaume nous a permis de remettre du sens dans la transformation de notre service. Écoute, méthode et bienveillance."
+                <div class="avis-author">— Céline, Responsable RH</div>
+            </div>
+            <div class="avis-card">
+                "Un accompagnement humain, créatif et pragmatique. Les équipes sont reparties avec de l’élan !"
+                <div class="avis-author">— Bruno, Directeur PME</div>
+            </div>
+            <!-- Ajoute ici d'autres avis -->
+        </div>
+    </section>
+    <section id="clients">
+        <h2 class="section-title">🤝 Nos clients</h2>
+        <div class="clients-grid">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Logo_R%C3%A9publique_fran%C3%A7aise.png" alt="République Française" class="client-logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logo_UCLouvain.png" alt="UCLouvain" class="client-logo">
+            <!-- Ajoute ici d'autres logos ou noms de clients -->
+        </div>
+    </section>
+    <section id="contact">
+        <h2 class="section-title">👋 Contact / Réserver un entretien</h2>
+        <form class="contact-form" action="mailto:laboiteaprismes@gmail.com" method="POST" enctype="text/plain">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="Nom" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="Email" required>
+            <label for="message">Message</label>
+            <textarea id="message" name="Message" required></textarea>
+            <button type="submit">Envoyer</button>
+        </form>
+        <div class="contact-infos">
+            <p>Ou contactez-moi directement :</p>
+            <div>📱 <a href="tel:+32497924475">0497 / 92 44 75</a></div>
+            <div>📩 <a href="mailto:laboiteaprismes@gmail.com">laboiteaprismes@gmail.com</a></div>
+        </div>
+    </section>
+    <footer style="text-align:center; padding:2rem 0; color:#6a8ce8; font-size:1rem;">
+        &copy; 2025 La Boîte à Prismes. Tous droits réservés.
     </footer>
+    <script>
+    // Prismes interactifs
+    function togglePrism(card) {
+        document.querySelectorAll('.prism-card').forEach(function(c) {
+            if(c !== card) c.classList.remove('active');
+        });
+        card.classList.toggle('active');
+    }
+    </script>
 </body>
 </html>
