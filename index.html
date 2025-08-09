@@ -22,16 +22,26 @@
       width: 100vw; height: 100vh;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.33;
+      opacity: 0.34;
       background: none;
       display: flex;
       justify-content: center;
       align-items: center;
+      animation: fadeinbg 2.5s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes fadeinbg {
+      from { opacity: 0; }
+      to { opacity: 0.34; }
     }
     .prism-bg svg {
       width: 70vw; min-width: 380px; max-width: 900px;
       height: auto;
-      filter: blur(0.7px) drop-shadow(0 12px 60px #e57fdc66);
+      filter: blur(0.6px) drop-shadow(0 12px 60px #e57fdc66);
+      animation: prismdrop 1.8s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes prismdrop {
+      from { transform: translateY(-40px) scale(.94);}
+      to { transform: translateY(0) scale(1);}
     }
     nav {
       background: rgba(255,255,255,0.96);
@@ -79,6 +89,11 @@
       font-size: 1.1rem;
       margin-bottom: 0.8rem;
       max-width: 600px;
+      animation: fadein 1.7s;
+    }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     .intro-btn {
       margin-top: 1.3rem;
@@ -95,16 +110,25 @@
       cursor: pointer;
       box-shadow: 0 4px 16px rgba(106,140,232,0.08);
       transition: background 0.3s, transform 0.2s;
+      animation: fadein 1.9s;
     }
     .cta-button:hover { background: #e57fdc; transform: translateY(-2px) scale(1.03);}
     section { max-width: 1200px; margin: auto; padding: 3rem 1rem;}
     .section-title {
-      font-size: 1.9rem; margin-bottom: 2rem; text-align: center;
+      font-size: 1.9rem; margin-bottom: 1.3rem; text-align: center;
       background: linear-gradient(90deg,#6a8ce8,#e57fdc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: 700;
       letter-spacing: 1px;
+      animation: fadein 2.1s;
+    }
+    .section-intro {
+      text-align: center;
+      margin-bottom: 2.3rem;
+      font-size: 1.11rem;
+      color: #444;
+      animation: fadein 2.2s;
     }
     /* Filtres badges */
     .filters-bar {
@@ -112,6 +136,7 @@
       flex-wrap: wrap;
       z-index: 2;
       position: relative;
+      animation: fadein 2.2s;
     }
     .filter-badge {
       background: #e7e0fa;
@@ -128,6 +153,11 @@
       border: 2px solid transparent;
       display: flex; align-items: center;
       gap: 0.5em;
+      animation: filterfade 1.5s;
+    }
+    @keyframes filterfade {
+      from { opacity: 0; transform: scale(.94);}
+      to { opacity: 1; transform: scale(1);}
     }
     .filter-badge.active {
       background: linear-gradient(90deg,#6a8ce8 55%,#e57fdc 98%);
@@ -135,7 +165,13 @@
       border-color: #e57fdc;
       transform: scale(1.07);
       box-shadow: 0 4px 22px rgba(229,127,220,0.13);
+      animation: pulse 1.3s infinite alternate;
     }
+    @keyframes pulse {
+      from { box-shadow: 0 4px 22px rgba(229,127,220,0.13);}
+      to   { box-shadow: 0 6px 38px rgba(229,127,220,0.18);}
+    }
+    .filter-badge:hover { background: #f8e5fc; color:#e57fdc; }
     /* Grille de prismes */
     .prisms-grid {
       display: grid;
@@ -144,6 +180,7 @@
       margin-bottom: 2rem;
       z-index: 2;
       position: relative;
+      animation: fadein 2.3s;
     }
     /* Carte prisme */
     .prism-card {
@@ -162,6 +199,17 @@
       justify-content: flex-start;
       align-items: flex-start;
       z-index: 2;
+      opacity: 0;
+      transform: translateY(50px) scale(.96);
+      animation: cardfadein 1.2s forwards;
+    }
+    .prism-card:nth-child(1) {animation-delay: 0.25s;}
+    .prism-card:nth-child(2) {animation-delay: 0.45s;}
+    .prism-card:nth-child(3) {animation-delay: 0.65s;}
+    .prism-card:nth-child(4) {animation-delay: 0.85s;}
+    @keyframes cardfadein {
+      from { opacity: 0; transform: translateY(50px) scale(.96);}
+      to { opacity: 1; transform: translateY(0) scale(1);}
     }
     .prism-card:hover {
       box-shadow: 0 12px 38px 0 rgba(229,127,220,.13);
@@ -173,7 +221,7 @@
     }
     .prism-icon { font-size: 2.1rem;}
     .prism-title { font-weight: 700; font-size: 1.19rem; margin-bottom: 0.2em;}
-    .prism-short { font-size: 1rem; color: #4f4f6e; margin-bottom: 0.7em;}
+    .prism-short { font-size: 1.01rem; color: #4f4f6e; margin-bottom: 0.7em;}
     .prism-tags {
       display: flex; gap: 0.6em; flex-wrap: wrap; margin-bottom: 0.5em;
     }
@@ -181,11 +229,13 @@
       background: #f5f4fa;
       color: #6a8ce8;
       border-radius: 9px;
-      padding: 0.2em 0.7em;
+      padding: 0.19em 0.7em;
       font-size: 0.88em;
       font-weight: 600;
       letter-spacing: 0.03em;
+      transition: background 0.23s, color 0.23s;
     }
+    .prism-tag:hover {background:#e57fdc; color:#fff;}
     /* Expansion */
     .prism-expansion {
       max-height: 0;
@@ -203,11 +253,12 @@
       max-height: 600px;
       opacity: 1;
       padding: 1rem 0.7rem 1rem 0.7rem;
+      animation: fadein 0.7s;
     }
+    .prism-expansion ul {margin:0.7em 0 0 1.1em;}
+    .prism-expansion li {margin-bottom:0.37em;}
     /* Expansion titre clownsultance */
-    .prism-card.clown .prism-title {
-      color: #e57fdc;
-    }
+    .prism-card.clown .prism-title { color: #e57fdc; }
     /* Responsive */
     @media (max-width: 900px) {
       .nav-container { padding: 1rem;}
@@ -290,10 +341,9 @@
   </nav>
   <header id="home">
     <h1>Accompagnement du changement humain & organisationnel</h1>
-    <p>Guillaume accompagne les organisations dans des moments-clés : transformation RH, fusion, crise, perte de repères. <br>
-      <span style="font-size:1.05em;">
-        Sa mission : éclairer le changement sous tous ses angles, grâce à une approche systémique, créative et humaine.
-      </span>
+    <p>
+      Guillaume accompagne les organisations dans des moments-clés : transformation RH, fusion, crise, perte de repères.<br>
+      Sa mission : éclairer le changement sous tous ses angles, grâce à une approche systémique, créative et humaine.
     </p>
     <div class="intro-btn">
       <a href="#prismes"><button class="cta-button">Découvrir les prismes</button></a>
@@ -302,6 +352,10 @@
   </header>
   <section id="prismes">
     <h2 class="section-title">🌈 Les Prismes d’intervention</h2>
+    <div class="section-intro">
+      <b>Pourquoi des prismes ?</b> Le changement est complexe : chaque prisme éclaire une facette.<br>
+      Choisissez votre angle pour transformer avec sens, cohérence et énergie.
+    </div>
     <!-- Filtres interactifs -->
     <div class="filters-bar" id="filters-bar">
       <button class="filter-badge active" data-filter="all">Tous</button>
@@ -312,76 +366,90 @@
     </div>
     <!-- Grille de prismes -->
     <div class="prisms-grid" id="prisms-grid">
-      <!-- Carte 1 -->
-      <div class="prism-card" data-tags="systemique conviction coaching">
+      <!-- Prisme 1 -->
+      <div class="prism-card" data-tags="systemique conviction">
         <div class="prism-header">
           <span class="prism-icon">💡</span>
-          <span class="prism-title">Consultance RH & Organisation</span>
+          <span class="prism-title">Vision Systémique</span>
         </div>
-        <div class="prism-short">Gestion de projet, transformation, interim</div>
+        <div class="prism-short">Comprendre les liens entre structures, stratégies et humains</div>
         <div class="prism-tags">
           <span class="prism-tag">Systémique</span>
           <span class="prism-tag">Conviction</span>
-          <span class="prism-tag">Coaching</span>
         </div>
         <div class="prism-expansion">
-          Une expérience solide depuis 2005, dans des structures de 80 à 1.200 personnes, publiques et privées. <br>
-          Management, automatisation, harmonisation des fonctions et salaires, développement de la polyvalence, réorganisation post-fusion.<br>
-          <b>Valeur ajoutée :</b> diagnostic systémique, mise en cohérence, changements réalistes et humains.
+          <b>Diagnostic & transformation</b> : analyse des interactions, des flux et des points de blocage.<br>
+          <ul>
+            <li>Clarification des rôles et des responsabilités</li>
+            <li>Accompagnement des fusions, réorganisations</li>
+            <li>Déploiement de nouveaux modes de gouvernance</li>
+          </ul>
+          <b>Bénéfices :</b> cohérence, efficacité, vision partagée.
         </div>
       </div>
-      <!-- Carte 2 -->
-      <div class="prism-card" data-tags="coaching creativite systemique">
+      <!-- Prisme 2 -->
+      <div class="prism-card" data-tags="coaching systemique">
         <div class="prism-header">
           <span class="prism-icon">🚀</span>
-          <span class="prism-title">Coaching de transition professionnelle</span>
+          <span class="prism-title">Coaching & Transition</span>
         </div>
-        <div class="prism-short">Élan, clarté, confort</div>
+        <div class="prism-short">Accompagner chaque personne et équipe dans le changement</div>
         <div class="prism-tags">
           <span class="prism-tag">Coaching</span>
-          <span class="prism-tag">Créativité relationnelle</span>
           <span class="prism-tag">Systémique</span>
         </div>
         <div class="prism-expansion">
-          Accompagnement personnalisé pour managers, dirigeant·es, équipes en mutation.<br>
-          Écoute active, outils de clarification, facilitation du rebond.<br>
-          <b>Objectif :</b> retrouver de l’élan et du sens dans la transition.
+          <b>Accompagnement personnalisé</b> : écoute, outils, feedbacks.<br>
+          <ul>
+            <li>Reconnaître les émotions et les résistances au changement</li>
+            <li>Faciliter le rebond individuel et collectif</li>
+            <li>Soutenir les managers et les équipes en mutation</li>
+          </ul>
+          <b>Bénéfices :</b> confiance, clarté, énergie retrouvée.
         </div>
       </div>
-      <!-- Carte 3 Clownsultance -->
-      <div class="prism-card clown" data-tags="creativite systemique conviction">
+      <!-- Prisme 3 Clownsultance -->
+      <div class="prism-card clown" data-tags="creativite conviction systemique">
         <div class="prism-header">
           <span class="prism-icon">🤡</span>
           <span class="prism-title">Clownsultance</span>
         </div>
-        <div class="prism-short">Intervention clownesque en contexte pro</div>
+        <div class="prism-short">Oser l’humour pour transformer les dynamiques collectives</div>
         <div class="prism-tags">
           <span class="prism-tag">Créativité relationnelle</span>
-          <span class="prism-tag">Systémique</span>
           <span class="prism-tag">Conviction</span>
+          <span class="prism-tag">Systémique</span>
         </div>
         <div class="prism-expansion">
-          <b>Clownsultance</b>, c’est l’intervention clownesque en entreprise : posture ludique, observation fine, puissance de transformation collective.<br>
-          Les clowns improvisent lors de réunions, séminaires ou événements d’équipe : ils mettent en scène les situations vécues, jouent avec les non-dits et tensions, rendent visibles les émotions enfouies.<br>
-          Grâce à leur naïveté et leur liberté d’expression, ils dédramatisent, ouvrent la parole et créent un espace de dialogue créatif. <br>
-          <i>La clownsultance, c’est la magie du changement par la poésie, l’absurde et l’intelligence collective.</i>
+          <b>Intervention clownesque en entreprise</b> : improvisation, miroir ludique, révélation des non-dits.<br>
+          <ul>
+            <li>Dédramatiser les tensions et ouvrir la parole</li>
+            <li>Créer un espace d’expression et d’innovation</li>
+            <li>Faciliter la cohésion et la confiance</li>
+          </ul>
+          <b>Bénéfices :</b> déclic collectif, créativité, authenticité.
         </div>
       </div>
-      <!-- Carte 4 -->
-      <div class="prism-card" data-tags="conviction creativite coaching">
+      <!-- Prisme 4 Intelligence Collective -->
+      <div class="prism-card" data-tags="creativite conviction coaching">
         <div class="prism-header">
           <span class="prism-icon">🧠</span>
-          <span class="prism-title">Ateliers de créativité & intelligence collective</span>
+          <span class="prism-title">Intelligence collective</span>
         </div>
-        <div class="prism-short">Innovation, cohésion, énergie collective</div>
+        <div class="prism-short">Stimuler l’innovation et la cohésion par la collaboration</div>
         <div class="prism-tags">
-          <span class="prism-tag">Conviction</span>
           <span class="prism-tag">Créativité relationnelle</span>
+          <span class="prism-tag">Conviction</span>
           <span class="prism-tag">Coaching</span>
         </div>
         <div class="prism-expansion">
-          Ateliers participatifs pour stimuler la créativité, renforcer la cohésion et générer des idées neuves.<br>
-          Animation, facilitation, outils d’intelligence collective pour dynamiser les équipes et faire émerger des solutions innovantes.
+          <b>Ateliers participatifs</b> : créativité, co-création, méthodes d’intelligence collective.<br>
+          <ul>
+            <li>Résolution de problématiques complexes</li>
+            <li>Émergence d’idées nouvelles</li>
+            <li>Renforcement de la cohésion d’équipe</li>
+          </ul>
+          <b>Bénéfices :</b> innovation, énergie collective, solutions durables.
         </div>
       </div>
     </div>
@@ -426,8 +494,10 @@
         prismCards.forEach(card=>{
           if(filter === 'all' || card.getAttribute('data-tags').includes(filter)) {
             card.style.display = '';
+            setTimeout(()=>card.classList.add('visible'), 150);
           } else {
             card.style.display = 'none';
+            card.classList.remove('visible');
           }
         });
       }
